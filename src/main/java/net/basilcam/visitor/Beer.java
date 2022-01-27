@@ -1,5 +1,7 @@
 package net.basilcam.visitor;
 
+import java.util.Objects;
+
 public class Beer implements ItemVisitable {
     private final String brewery;
     private final String flavor;
@@ -32,5 +34,37 @@ public class Beer implements ItemVisitable {
     @Override
     public double accept(ItemVisitor visitor) {
         return visitor.visit(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Beer beer = (Beer) o;
+
+        return Double.compare(beer.pricePerOz, pricePerOz) == 0
+                && Double.compare(beer.volumeOz, volumeOz) == 0
+                && Objects.equals(brewery, beer.brewery)
+                && Objects.equals(flavor, beer.flavor);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(brewery, flavor, pricePerOz, volumeOz);
+    }
+
+    @Override
+    public String toString() {
+        return "Beer{" +
+                "brewery='" + brewery + '\'' +
+                ", flavor='" + flavor + '\'' +
+                ", pricePerOz=" + pricePerOz +
+                ", volumeOz=" + volumeOz +
+                '}';
     }
 }

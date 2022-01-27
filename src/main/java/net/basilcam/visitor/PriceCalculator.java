@@ -16,7 +16,6 @@ public class PriceCalculator implements ItemVisitor {
         double volumeOz = beer.getVolumeOz();
         double price = beer.getPricePerOz() * volumeOz;
 
-
         if (volumeOz < 32) {
             return price;
         } else if (volumeOz >= 32 && volumeOz < 64) {
@@ -25,4 +24,6 @@ public class PriceCalculator implements ItemVisitor {
             return price * 0.80;
         }
     }
+
+
 }
